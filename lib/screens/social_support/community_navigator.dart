@@ -42,12 +42,20 @@ class _CommunityNavigatorState extends State<CommunityNavigator> {
             children: [
               /* ─────────── App-bar ─────────── */
               MyAppBar(
-                showMenuIcon: true,
+                showMenuIcon: false,
                 showBackIcon: true,
                 screenName: 'Book Community Navigator',
+                profile: true,
                 showBottom: false,
                 userName: false,
-                showNotificationIcon: true,
+                showNotificationIcon: false,
+              ),
+              SizedBox(height: 20),
+              Divider(
+                color: Colors.grey,
+                thickness: 1,      // height of the line
+                indent: 20,        // left space
+                endIndent: 20,     // right space
               ),
 
               const Padding(

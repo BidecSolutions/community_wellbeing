@@ -24,12 +24,20 @@ class NotSure extends StatelessWidget {
           child: Column(
             children: [
               MyAppBar(
-                showMenuIcon: true,
+                showMenuIcon: false,
                 showBackIcon: true,
                 screenName: 'Not Sure If it\'s Serious?',
+                profile:true,
                 showBottom: false,
                 userName: false,
-                showNotificationIcon: true,
+                showNotificationIcon: false,
+              ),
+              SizedBox(height: 20),
+              Divider(
+                color: Colors.grey,
+                thickness: 1,      // height of the line
+                indent: 20,        // left space
+                endIndent: 20,     // right space
               ),
               //--- App bar end --
               Padding(
@@ -234,21 +242,20 @@ class NotSure extends StatelessWidget {
                               onPressed: () async {
                                 final Uri phoneUri = Uri(
                                   scheme: 'tel',
-                                  path:
-                                      '111', // Replace with actual phone number
+                                  path: '111', // Replace with actual phone number
                                 );
                                 if (await canLaunchUrl(phoneUri)) {
                                   await launchUrl(phoneUri);
-                                } else {}
+                                } else {
+                                  // Optionally show a snackbar or error message
+                                  print('Could not launch phone dialer');
+                                }
                               },
                               style: ElevatedButton.styleFrom(
                                 elevation: 0,
                                 backgroundColor: Color(0xFFFEDBDF),
                                 foregroundColor: Color(0xFFFEDBDF),
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 10,
-                                  horizontal: 25,
-                                ),
+                                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(5),
                                 ),
@@ -258,6 +265,7 @@ class NotSure extends StatelessWidget {
                                 style: TextStyle(color: Colors.black),
                               ),
                             ),
+
                           ],
                         ),
                       ),

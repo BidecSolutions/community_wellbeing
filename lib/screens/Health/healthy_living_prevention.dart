@@ -46,12 +46,20 @@ class _HealthyLivingPreventionState extends State<HealthyLivingPrevention> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               MyAppBar(
-                showMenuIcon: true,
+                showMenuIcon: false,
                 showBackIcon: true,
                 screenName: 'Healthy Living Prevention',
                 showBottom: false,
                 userName: false,
-                showNotificationIcon: true,
+                showNotificationIcon: false,
+                profile: true,
+              ),
+              SizedBox(height: 20),
+              Divider(
+                color: Colors.grey,
+                thickness: 1,      // height of the line
+                indent: 20,        // left space
+                endIndent: 20,     // right space
               ),
               //--- steps count start --
               Center(

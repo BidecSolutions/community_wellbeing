@@ -39,12 +39,20 @@ class _KnowWhatToDoWhenSickState extends State<KnowWhatToDoWhenSick> {
           child: Column(
             children: [
               MyAppBar(
-                showMenuIcon: true,
+                showMenuIcon: false,
                 showBackIcon: true,
                 screenName: 'Know What To Do When Sick',
                 showBottom: false,
                 userName: false,
-                showNotificationIcon: true,
+                showNotificationIcon: false,
+                profile: true,
+              ),
+              SizedBox(height: 20),
+              Divider(
+                color: Colors.grey,
+                thickness: 1,      // height of the line
+                indent: 20,        // left space
+                endIndent: 20,     // right space
               ),
               //--- App bar end --
               Padding(
@@ -378,33 +386,33 @@ class _KnowWhatToDoWhenSickState extends State<KnowWhatToDoWhenSick> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 20),
-                      Center(
-                        child: SizedBox(
-                          width: 150,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Get.toNamed('/home_repair_support');
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.primaryColor,
-                              padding: const EdgeInsets.symmetric(vertical: 12),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            child: const Text(
-                              'Call Healthline',
-                              style: TextStyle(
-                                fontFamily: AppFonts.primaryFontFamily,
-                                fontSize: 12,
-                                // fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                      // const SizedBox(height: 20),
+                      // Center(
+                      //   child: SizedBox(
+                      //     width: 150,
+                      //     child: ElevatedButton(
+                      //       onPressed: () {
+                      //         Get.toNamed('/home_repair_support');
+                      //       },
+                      //       style: ElevatedButton.styleFrom(
+                      //         backgroundColor: AppColors.primaryColor,
+                      //         padding: const EdgeInsets.symmetric(vertical: 12),
+                      //         shape: RoundedRectangleBorder(
+                      //           borderRadius: BorderRadius.circular(10),
+                      //         ),
+                      //       ),
+                      //       child: const Text(
+                      //         'Call Healthline',
+                      //         style: TextStyle(
+                      //           fontFamily: AppFonts.primaryFontFamily,
+                      //           fontSize: 12,
+                      //           // fontWeight: FontWeight.bold,
+                      //           color: Colors.white,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
 
                       //---see a doctor if you notice start--
                       const SizedBox(height: 25),
@@ -598,33 +606,33 @@ class _KnowWhatToDoWhenSickState extends State<KnowWhatToDoWhenSick> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 20),
-                      Center(
-                        child: SizedBox(
-                          width: 150,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Get.toNamed('/home_repair_support');
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.primaryColor,
-                              padding: const EdgeInsets.symmetric(vertical: 12),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                            ),
-                            child: const Text(
-                              'Find Clinic Near You',
-                              style: TextStyle(
-                                fontFamily: AppFonts.primaryFontFamily,
-                                fontSize: 12,
-                                // fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                      // const SizedBox(height: 20),
+                      // Center(
+                      //   child: SizedBox(
+                      //     width: 150,
+                      //     child: ElevatedButton(
+                      //       onPressed: () {
+                      //         Get.toNamed('/home_repair_support');
+                      //       },
+                      //       style: ElevatedButton.styleFrom(
+                      //         backgroundColor: AppColors.primaryColor,
+                      //         padding: const EdgeInsets.symmetric(vertical: 12),
+                      //         shape: RoundedRectangleBorder(
+                      //           borderRadius: BorderRadius.circular(10),
+                      //         ),
+                      //       ),
+                      //       child: const Text(
+                      //         'Find Clinic Near You',
+                      //         style: TextStyle(
+                      //           fontFamily: AppFonts.primaryFontFamily,
+                      //           fontSize: 12,
+                      //           // fontWeight: FontWeight.bold,
+                      //           color: Colors.white,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                       //---see a doctor if you notice end--
                     ],
                   ),

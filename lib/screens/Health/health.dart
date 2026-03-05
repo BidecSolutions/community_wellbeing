@@ -22,14 +22,20 @@ class HealthPage extends StatelessWidget {
             children: [
               /* ─────────── App-bar ─────────── */
               MyAppBar(
-                showMenuIcon: true,
+                showMenuIcon: false,
                 showBackIcon: true,
                 screenName: 'Health & Wellbeing',
-                showBottom: true,
+                showBottom: false,
                 userName: false,
-                showNotificationIcon: true,
+                showNotificationIcon: false,
               ),
-
+              SizedBox(height: 20),
+              Divider(
+                color: Colors.grey,
+                thickness: 1,      // height of the line
+                indent: 20,        // left space
+                endIndent: 20,     // right space
+              ),
               /* ─────────── App-bar End ─────────── */
               // --- Emergency Help & Clinic Access Start--
               const SizedBox(height: 20),
@@ -208,41 +214,41 @@ class HealthPage extends StatelessWidget {
                                 // call end
                                 const SizedBox(width: 16),
                                 // not sure start
-                                Expanded(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Get.toNamed('/care_options');
-                                    },
-                                    child: Container(
-                                      padding: const EdgeInsets.all(30),
-                                      decoration: BoxDecoration(
-                                        color: Color(0xFFFFF0CA),
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Image.asset(
-                                            'assets/images/health/your_doctor.png',
-                                            height: 50,
-                                            fit: BoxFit.contain,
-                                          ),
-                                          const SizedBox(height: 25),
-                                          Text(
-                                            'Your Doctor',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              fontFamily:
-                                                  AppFonts.secondaryFontFamily,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 16,
-                                              color: Colors.black,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                // Expanded(
+                                //   child: GestureDetector(
+                                //     onTap: () {
+                                //       Get.toNamed('/care_options');
+                                //     },
+                                //     child: Container(
+                                //       padding: const EdgeInsets.all(30),
+                                //       decoration: BoxDecoration(
+                                //         color: Color(0xFFFFF0CA),
+                                //         borderRadius: BorderRadius.circular(12),
+                                //       ),
+                                //       child: Column(
+                                //         children: [
+                                //           Image.asset(
+                                //             'assets/images/health/your_doctor.png',
+                                //             height: 50,
+                                //             fit: BoxFit.contain,
+                                //           ),
+                                //           const SizedBox(height: 25),
+                                //           Text(
+                                //             'Your Doctor',
+                                //             textAlign: TextAlign.center,
+                                //             style: TextStyle(
+                                //               fontFamily:
+                                //                   AppFonts.secondaryFontFamily,
+                                //               fontWeight: FontWeight.bold,
+                                //               fontSize: 16,
+                                //               color: Colors.black,
+                                //             ),
+                                //           ),
+                                //         ],
+                                //       ),
+                                //     ),
+                                //   ),
+                                // ),
                                 // not sure end
                               ],
                             ),
@@ -284,61 +290,61 @@ class HealthPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    GestureDetector(
-                      onTap: () {
-                        Get.toNamed('/care_options');
-                      },
-                      child: Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: Color(0xFFFEDBDF),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            // Image on the left
-                            Image.asset(
-                              'assets/images/health/care_option.png',
-                              height: 60,
-                              // width: 60,
-                              fit: BoxFit.contain,
-                            ),
-                            const SizedBox(width: 12),
-
-                            // Text content on the right
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Māori & Pasifika Care Options',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontFamily: AppFonts.secondaryFontFamily,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 6),
-                                  Text(
-                                    'Dedicated support that honours the cultural identity and wellbeing of Māori and Pasifika peoples.',
-                                    style: TextStyle(
-                                      fontFamily: AppFonts.primaryFontFamily,
-                                      fontSize: 14,
-                                      color: Color(0xFF4C4C4C),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 10),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    // const SizedBox(height: 20),
+                    // GestureDetector(
+                    //   onTap: () {
+                    //     Get.toNamed('/care_options');
+                    //   },
+                    //   child: Container(
+                    //     width: double.infinity,
+                    //     padding: const EdgeInsets.all(16),
+                    //     decoration: BoxDecoration(
+                    //       color: Color(0xFFFEDBDF),
+                    //       borderRadius: BorderRadius.circular(12),
+                    //     ),
+                    //     child: Row(
+                    //       crossAxisAlignment: CrossAxisAlignment.center,
+                    //       children: [
+                    //         // Image on the left
+                    //         Image.asset(
+                    //           'assets/images/health/care_option.png',
+                    //           height: 60,
+                    //           // width: 60,
+                    //           fit: BoxFit.contain,
+                    //         ),
+                    //         const SizedBox(width: 12),
+                    //
+                    //         // Text content on the right
+                    //         Expanded(
+                    //           child: Column(
+                    //             crossAxisAlignment: CrossAxisAlignment.start,
+                    //             children: [
+                    //               Text(
+                    //                 'Māori & Pasifika Care Options',
+                    //                 style: TextStyle(
+                    //                   fontSize: 16,
+                    //                   fontFamily: AppFonts.secondaryFontFamily,
+                    //                   fontWeight: FontWeight.bold,
+                    //                   color: Colors.black,
+                    //                 ),
+                    //               ),
+                    //               const SizedBox(height: 6),
+                    //               Text(
+                    //                 'Dedicated support that honours the cultural identity and wellbeing of Māori and Pasifika peoples.',
+                    //                 style: TextStyle(
+                    //                   fontFamily: AppFonts.primaryFontFamily,
+                    //                   fontSize: 14,
+                    //                   color: Color(0xFF4C4C4C),
+                    //                 ),
+                    //               ),
+                    //               const SizedBox(height: 10),
+                    //             ],
+                    //           ),
+                    //         ),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
 
                     //--- Culturally Safe Healthcare end--
 
@@ -587,78 +593,78 @@ class HealthPage extends StatelessWidget {
                         ),
                         // mental health end
                         // location start
-                        SizedBox(height: 8),
-                        GestureDetector(
-                          onTap: () {
-                            Get.toNamed('/stay_connected');
-                          },
-                          child: Card(
-                            elevation: 0,
-                            color: Colors.white,
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    padding: const EdgeInsets.all(12),
-                                    decoration: BoxDecoration(
-                                      color: const Color(0xFFFFF0CA),
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                    child: Image.asset(
-                                      "assets/images/health/stay_connected.png",
-                                    ),
-                                  ),
-
-                                  const SizedBox(width: 8),
-                                  Expanded(
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Expanded(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: const [
-                                              Text(
-                                                'Stay Connected',
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontFamily:
-                                                      AppFonts
-                                                          .secondaryFontFamily,
-                                                ),
-                                              ),
-                                              Text(
-                                                'Feel less alone, stay connected',
-                                                style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily:
-                                                      AppFonts
-                                                          .primaryFontFamily,
-                                                  color: AppColors.hintColor,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Image.asset(
-                                          'assets/images/housing/overcrowding_arrow.png', // Replace with your arrow image path
-                                          height: 30,
-                                          width: 30,
-                                          fit: BoxFit.contain,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  // bed end
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
+                        // SizedBox(height: 8),
+                        // GestureDetector(
+                        //   onTap: () {
+                        //     Get.toNamed('/stay_connected');
+                        //   },
+                        //   child: Card(
+                        //     elevation: 0,
+                        //     color: Colors.white,
+                        //     child: Padding(
+                        //       padding: const EdgeInsets.all(10.0),
+                        //       child: Row(
+                        //         children: [
+                        //           Container(
+                        //             padding: const EdgeInsets.all(12),
+                        //             decoration: BoxDecoration(
+                        //               color: const Color(0xFFFFF0CA),
+                        //               borderRadius: BorderRadius.circular(12),
+                        //             ),
+                        //             child: Image.asset(
+                        //               "assets/images/health/stay_connected.png",
+                        //             ),
+                        //           ),
+                        //
+                        //           const SizedBox(width: 8),
+                        //           Expanded(
+                        //             child: Row(
+                        //               crossAxisAlignment:
+                        //                   CrossAxisAlignment.center,
+                        //               children: [
+                        //                 Expanded(
+                        //                   child: Column(
+                        //                     crossAxisAlignment:
+                        //                         CrossAxisAlignment.start,
+                        //                     children: const [
+                        //                       Text(
+                        //                         'Stay Connected',
+                        //                         style: TextStyle(
+                        //                           fontSize: 14,
+                        //                           fontWeight: FontWeight.bold,
+                        //                           fontFamily:
+                        //                               AppFonts
+                        //                                   .secondaryFontFamily,
+                        //                         ),
+                        //                       ),
+                        //                       Text(
+                        //                         'Feel less alone, stay connected',
+                        //                         style: TextStyle(
+                        //                           fontSize: 12,
+                        //                           fontFamily:
+                        //                               AppFonts
+                        //                                   .primaryFontFamily,
+                        //                           color: AppColors.hintColor,
+                        //                         ),
+                        //                       ),
+                        //                     ],
+                        //                   ),
+                        //                 ),
+                        //                 Image.asset(
+                        //                   'assets/images/housing/overcrowding_arrow.png', // Replace with your arrow image path
+                        //                   height: 30,
+                        //                   width: 30,
+                        //                   fit: BoxFit.contain,
+                        //                 ),
+                        //               ],
+                        //             ),
+                        //           ),
+                        //           // bed end
+                        //         ],
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                         // location end
                         // bed start
                         SizedBox(height: 8),

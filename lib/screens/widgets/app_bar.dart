@@ -1,32 +1,37 @@
 import 'package:community_app/app_settings/fonts.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-
 final box = GetStorage();
+
+
 
 class MyAppBar extends StatelessWidget {
   final bool showNotificationIcon;
+  final bool profile;
   final bool showMenuIcon;
   final bool showBackIcon;
   final Widget? bottom;
   final bool showBottom;
   final bool userName;
-  final String screenName;
+  final screenName;
   const MyAppBar({
     super.key,
     this.showNotificationIcon = false,
+    this.profile = false,
     this.showMenuIcon = false,
     this.showBackIcon = false,
     this.bottom,
     this.userName = true,
     this.showBottom = true,
     this.screenName = "",
+
   });
   @override
   Widget build(BuildContext context) {
-    final loginUser = "kia Ora,\n${box.read('name') ?? 'Guest'}";
-    final parts = loginUser.split('\n');
-    final greeting = parts.length > 1 ? '${parts.first}\n' : '';
+    final loginUser = "kia ora,\n${box.read('name') ?? 'Guest'}";
+    final parts =   loginUser.split('\n');
+    final greeting = parts.length > 1 ? parts.first + '\n' : '';
     final name = parts.length > 1 ? parts.last : parts.first;
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -42,41 +47,30 @@ class MyAppBar extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 8.0),
                   child: CircleAvatar(
                     backgroundColor: Colors.white,
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.arrow_back_ios_new,
-                        color: Colors.black,
-                      ),
+                    child:IconButton(
+                      icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
                       onPressed: () => Navigator.pop(context),
                     ),
                   ),
                 ),
 
-              if (userName)
+              if(userName)
                 Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20),
+                  child: Padding(padding: const EdgeInsets.only(left: 20),
                     child: Text.rich(
                       TextSpan(
                         children: [
                           TextSpan(
                             text: greeting,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontFamily:
-                                  AppFonts.secondaryFontFamily, // Use your font
+                            style: const TextStyle(fontSize: 20, color: Colors.black,
+                              fontWeight: FontWeight.w400,
+                              fontFamily: AppFonts.secondaryFontFamily, // Use your font
                             ),
                           ),
                           TextSpan(
                             text: name,
-                            style: const TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                              fontFamily:
-                                  AppFonts.secondaryFontFamily, // Use your font
+                            style: const TextStyle(fontSize: 48, fontWeight: FontWeight.w600, color: Colors.black,
+                              fontFamily: AppFonts.secondaryFontFamily, // Use your font
                             ),
                           ),
                         ],
@@ -90,65 +84,65 @@ class MyAppBar extends StatelessWidget {
                 children: [
                   if (showNotificationIcon)
                     Padding(
-                      padding: const EdgeInsets.only(
-                        right: 8.0,
-                      ), // Add right padding
+                      padding: const EdgeInsets.only(right: 8.0), // Add right padding
                       child: Container(
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.white,
                         ),
                         child: IconButton(
-                          icon: const Icon(
-                            Icons.notifications_none_outlined,
-                            color: Colors.black,
-                          ),
-                          onPressed: () {},
+                          icon: const Icon(Icons.notifications_none_outlined, color: Colors.black),
+                          onPressed: () {
+                            // Handle notification button press
+                            print("Notification button pressed");
+                          },
+                        ),
+                      ),
+                    ),
+                  if (profile)
+                    Padding(
+                      padding: const EdgeInsets.only(right: 20.0), // Add right padding
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                        ),
+                        child: IconButton(
+                          icon: const Icon(Icons.person_outlined, color: Colors.black),
+                          onPressed: () {
+                            Get.toNamed('your_profile');
+                          },
                         ),
                       ),
                     ),
                   if (showMenuIcon)
                     Builder(
-                      builder:
-                          (context) => Padding(
-                            padding: const EdgeInsets.only(
-                              left: 8.0,
-                              right: 20.0,
-                            ),
-                            child: Container(
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.white,
-                              ),
-                              child: IconButton(
-                                icon: const Icon(
-                                  Icons.menu,
-                                  color: Colors.black,
-                                ),
-                                onPressed: () {
-                                  Scaffold.of(context).openDrawer();
-                                },
-                              ),
-                            ),
+                      builder: (context) => Padding(
+                        padding: const EdgeInsets.only(left: 8.0, right: 20.0),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white,
                           ),
-                    ),
+                          child: IconButton(
+                            icon: const Icon(Icons.menu, color: Colors.black),
+                            onPressed: () {
+                              Scaffold.of(context).openDrawer();
+                            },
+                          ),
+                        ),
+                      ),
+                    )
                 ],
-              ),
+              )
             ],
           ),
 
-          if (screenName != "")
+          if(screenName  != "")
             Center(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: Text(
-                  screenName,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: AppFonts.secondaryFontFamily,
-                  ),
+              child: Padding(padding: const EdgeInsets.only(top: 15),
+                child: Text(screenName,textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, fontFamily: AppFonts.secondaryFontFamily),
                 ),
               ),
             ),

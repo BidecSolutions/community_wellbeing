@@ -41,12 +41,20 @@ class _CommunityWasteSupportRequestState
             children: [
               /* ─────────── App-bar ─────────── */
               MyAppBar(
-                showMenuIcon: true,
+                showMenuIcon:false,
                 showBackIcon: true,
                 screenName: 'Community Waste Support Request',
                 showBottom: false,
+                profile:true,
                 userName: false,
-                showNotificationIcon: true,
+                showNotificationIcon: false,
+              ),
+              SizedBox(height: 20),
+              Divider(
+                color: Colors.grey,
+                thickness: 1,      // height of the line
+                indent: 20,        // left space
+                endIndent: 20,     // right space
               ),
 
               const Padding(

@@ -37,13 +37,22 @@ class _SocialSupportState extends State<SocialSupport> {
             children: [
               /* ─────────── App-bar ─────────── */
               MyAppBar(
-                showMenuIcon: true,
+                showMenuIcon: false,
                 showBackIcon: true,
                 screenName: 'Social Support',
-                showBottom: true,
+                showBottom: false,
+                profile: true,
                 userName: false,
                 showNotificationIcon: false,
               ),
+              SizedBox(height: 20),
+              Divider(
+                color: Colors.grey,
+                thickness: 1,      // height of the line
+                indent: 20,        // left space
+                endIndent: 20,     // right space
+              ),
+
 
               /* ─────────── App-bar End ─────────── */
               // --- Emergency Help & Clinic Access Start--

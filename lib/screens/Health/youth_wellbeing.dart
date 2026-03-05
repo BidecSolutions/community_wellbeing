@@ -35,12 +35,20 @@ class _YouthWellbeingState extends State<YouthWellbeing> {
           child: Column(
             children: [
               MyAppBar(
-                showMenuIcon: true,
+                showMenuIcon: false,
                 showBackIcon: true,
                 screenName: 'Youth Wellbeing',
                 showBottom: false,
                 userName: false,
-                showNotificationIcon: true,
+                showNotificationIcon: false,
+                profile: true,
+              ),
+              SizedBox(height: 20),
+              Divider(
+                color: Colors.grey,
+                thickness: 1,      // height of the line
+                indent: 20,        // left space
+                endIndent: 20,     // right space
               ),
               //--- App bar end --
               Padding(
@@ -213,110 +221,110 @@ class _YouthWellbeingState extends State<YouthWellbeing> {
                       //--- horizontal scroll end--
 
                       //---not feeling ok start--
-                      const SizedBox(height: 25),
-                      const Padding(
-                        padding: EdgeInsets.all(20.0),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            'Not Feeling Ok?',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 22,
-                              fontFamily: AppFonts.secondaryFontFamily,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 0),
-                        child: Column(
-                          children: [
-                            // Two half width grids 1st
-                            IntrinsicHeight(
-                              child: Row(
-                                children: [
-                                  // call start
-                                  Expanded(
-                                    child: Container(
-                                      padding: const EdgeInsets.all(30),
-                                      decoration: BoxDecoration(
-                                        color: Color(0xFFFFF0CA),
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Image.asset(
-                                            'assets/images/health/talk_to_someone.png',
-                                            height: 50,
-                                            fit: BoxFit.contain,
-                                          ),
-                                          const SizedBox(height: 18),
-                                          Text(
-                                            'Talk To Someone',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              fontFamily:
-                                                  AppFonts.primaryFontFamily,
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 16,
-                                              color: Colors.black,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-
-                                  // call end
-                                  const SizedBox(width: 16),
-                                  // not sure start
-                                  Expanded(
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        // Get.toNamed('/not_sure');
-                                      },
-                                      child: Container(
-                                        padding: const EdgeInsets.all(30),
-                                        decoration: BoxDecoration(
-                                          color: Color(0xFFD5EBFF),
-                                          borderRadius: BorderRadius.circular(
-                                            12,
-                                          ),
-                                        ),
-                                        child: Column(
-                                          children: [
-                                            Image.asset(
-                                              'assets/images/health/youth_group.png',
-                                              height: 50,
-                                              fit: BoxFit.contain,
-                                            ),
-                                            const SizedBox(height: 18),
-                                            Text(
-                                              'Youth Group',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                fontFamily:
-                                                    AppFonts.primaryFontFamily,
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 16,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  // not sure end
-                                ],
-                              ),
-                            ),
-
-                            // Two half width grids 1st end
-                          ],
-                        ),
-                      ),
+                      // const SizedBox(height: 25),
+                      // const Padding(
+                      //   padding: EdgeInsets.all(20.0),
+                      //   child: Align(
+                      //     alignment: Alignment.center,
+                      //     child: Text(
+                      //       'Not Feeling Ok?',
+                      //       style: TextStyle(
+                      //         fontWeight: FontWeight.bold,
+                      //         fontSize: 22,
+                      //         fontFamily: AppFonts.secondaryFontFamily,
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
+                      // Padding(
+                      //   padding: const EdgeInsets.symmetric(horizontal: 0),
+                      //   child: Column(
+                      //     children: [
+                      //       // Two half width grids 1st
+                      //       IntrinsicHeight(
+                      //         child: Row(
+                      //           children: [
+                      //             // call start
+                      //             Expanded(
+                      //               child: Container(
+                      //                 padding: const EdgeInsets.all(30),
+                      //                 decoration: BoxDecoration(
+                      //                   color: Color(0xFFFFF0CA),
+                      //                   borderRadius: BorderRadius.circular(12),
+                      //                 ),
+                      //                 child: Column(
+                      //                   children: [
+                      //                     Image.asset(
+                      //                       'assets/images/health/talk_to_someone.png',
+                      //                       height: 50,
+                      //                       fit: BoxFit.contain,
+                      //                     ),
+                      //                     const SizedBox(height: 18),
+                      //                     Text(
+                      //                       'Talk To Someone',
+                      //                       textAlign: TextAlign.center,
+                      //                       style: TextStyle(
+                      //                         fontFamily:
+                      //                             AppFonts.primaryFontFamily,
+                      //                         fontWeight: FontWeight.w400,
+                      //                         fontSize: 16,
+                      //                         color: Colors.black,
+                      //                       ),
+                      //                     ),
+                      //                   ],
+                      //                 ),
+                      //               ),
+                      //             ),
+                      //
+                      //             // call end
+                      //             const SizedBox(width: 16),
+                      //             // not sure start
+                      //             Expanded(
+                      //               child: GestureDetector(
+                      //                 onTap: () {
+                      //                   // Get.toNamed('/not_sure');
+                      //                 },
+                      //                 child: Container(
+                      //                   padding: const EdgeInsets.all(30),
+                      //                   decoration: BoxDecoration(
+                      //                     color: Color(0xFFD5EBFF),
+                      //                     borderRadius: BorderRadius.circular(
+                      //                       12,
+                      //                     ),
+                      //                   ),
+                      //                   child: Column(
+                      //                     children: [
+                      //                       Image.asset(
+                      //                         'assets/images/health/youth_group.png',
+                      //                         height: 50,
+                      //                         fit: BoxFit.contain,
+                      //                       ),
+                      //                       const SizedBox(height: 18),
+                      //                       Text(
+                      //                         'Youth Group',
+                      //                         textAlign: TextAlign.center,
+                      //                         style: TextStyle(
+                      //                           fontFamily:
+                      //                               AppFonts.primaryFontFamily,
+                      //                           fontWeight: FontWeight.w400,
+                      //                           fontSize: 16,
+                      //                           color: Colors.black,
+                      //                         ),
+                      //                       ),
+                      //                     ],
+                      //                   ),
+                      //                 ),
+                      //               ),
+                      //             ),
+                      //             // not sure end
+                      //           ],
+                      //         ),
+                      //       ),
+                      //
+                      //       // Two half width grids 1st end
+                      //     ],
+                      //   ),
+                      // ),
                       //--- Trusted Repair Services start --
                       const SizedBox(height: 45),
                       Container(
