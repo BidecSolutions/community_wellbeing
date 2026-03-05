@@ -1,0 +1,152 @@
+import 'package:flutter/material.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) => MaterialApp(home: ChatListScreen(userId: 'user3'));
+}
+
+class ChatListScreen extends StatefulWidget {
+  final String userId;
+  const ChatListScreen({required this.userId});
+
+  @override
+  State<ChatListScreen> createState() => _ChatListScreenState();
+}
+
+class _ChatListScreenState extends State<ChatListScreen> {
+  List<String> contacts = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadContacts();
+  }
+
+  // ✅ UPDATED: Load all users this user chatted with
+  void loadContacts() async {
+    final res = await http.get(Uri.parse('http://192.168.11.191:3000/messages/${widget.userId}'));
+    final data = jsonDecode(res.body);
+    final uniqueUsers = <String>{};
+
+    for (final m in data) {
+      final String from = m['from'];
+      final String to = m['to'];
+
+      if (from != widget.userId) uniqueUsers.add(from);
+      if (to != widget.userId) uniqueUsers.add(to);
+    }
+
+    setState(() => contacts = uniqueUsers.toList());
+  }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(title: Text('Chats')),
+    body: ListView(
+      children: contacts
+          .map((id) => ListTile(
+        title: Text('Chat with $id'),
+        onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (_) => ChatScreen(userId: widget.userId, recipientId: id))),
+      ))
+          .toList(),
+    ),
+  );
+}
+
+class ChatScreen extends StatefulWidget {
+  final String userId;
+  final String recipientId;
+
+  const ChatScreen({required this.userId, required this.recipientId});
+
+  @override
+  State<ChatScreen> createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
+  late IO.Socket socket;
+  List<String> messages = [];
+  final controller = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    initSocket();
+    fetchHistory();
+  }
+
+  void initSocket() {
+    socket = IO.io('http://192.168.11.191:3000', {
+      'transports': ['websocket'],
+      'autoConnect': false,
+      'query': {'userId': widget.userId},
+    });
+
+    socket.connect();
+
+    socket.onConnect((_) {
+      print('Connected as ${widget.userId}');
+      socket.on('receive_message', (data) {
+        final from = data['from'];
+        final text = data['text'];
+
+        setState(() {
+          messages.add('$from: $text');
+        });
+      });
+    });
+  }
+
+  void fetchHistory() async {
+    final res = await http.get(Uri.parse('http://192.168.11.191:3000/messages?user1=${widget.userId}&user2=${widget.recipientId}'));
+    final data = jsonDecode(res.body);
+    final List<dynamic> history = data is List ? data : data;
+    setState(() => messages = history.map((m) => "${m['from']}: ${m['text']}").toList());
+  }
+
+  void sendMessage() {
+    final text = controller.text.trim();
+    if (text.isEmpty) return;
+    socket.emit('send_message', {
+      'from': widget.userId,
+      'to': widget.recipientId,
+      'text': text,
+    });
+    setState(() {
+      messages.add('You: $text');
+      controller.clear();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(title: Text('Chat with ${widget.recipientId}')),
+    body: Column(
+      children: [
+        Expanded(
+          child: ListView(
+            padding: EdgeInsets.all(8),
+            children: messages.map((msg) => Text(msg)).toList(),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              Expanded(child: TextField(controller: controller)),
+              IconButton(icon: Icon(Icons.send), onPressed: sendMessage),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
+}

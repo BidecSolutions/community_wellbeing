@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "588876340811",
+    "project_id": "communtiy-cd1a3",
+    "storage_bucket": "communtiy-cd1a3.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:588876340811:android:7fc5b9e9b3c3e84fc2b7ce",
+        "android_client_info": {
+          "package_name": "com.akegroup.te_pou_hihiri"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMGBp1cgx5hS8FmAojtX1ApWvnD7by5lU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

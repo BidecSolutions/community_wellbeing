@@ -1,0 +1,527 @@
+import 'package:community_app/screens/widgets/dynamic_bottom_sheet.dart';
+import 'package:community_app/screens/widgets/searchable_dropdown.dart';
+import 'package:community_app/screens/widgets/searchable_sa.dart';
+import 'package:flutter/material.dart';
+import 'package:community_app/screens/widgets/bottom_navigation.dart';
+import 'package:community_app/screens/widgets/app_bar.dart' hide box;
+import 'package:community_app/app_settings/fonts.dart';
+import 'package:community_app/app_settings/colors.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import '../../controllers/social_support/community_navigator_controller.dart';
+import '../widgets/drawer.dart';
+import '../widgets/snack_bar.dart';
+
+class CommunityNavigator extends StatefulWidget {
+  const CommunityNavigator({super.key});
+
+  @override
+  State<CommunityNavigator> createState() => _CommunityNavigatorState();
+}
+
+class _CommunityNavigatorState extends State<CommunityNavigator> {
+  @override
+  void initState() {
+    super.initState();
+    controller.nameController.text = box.read('name') ?? '';
+    controller.phoneController.text = box.read('phone') ?? '';
+  }
+
+  final controller = Get.put(CommunityNavigatorController());
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      drawer: MyDrawer(),
+      backgroundColor: AppColors.screenBg,
+      bottomNavigationBar: const CustomBottomNavigation(),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              /* ─────────── App-bar ─────────── */
+              MyAppBar(
+                showMenuIcon: true,
+                showBackIcon: true,
+                screenName: 'Book Community Navigator',
+                showBottom: false,
+                userName: false,
+                showNotificationIcon: true,
+              ),
+
+              const Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    '1. Your Details',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      fontFamily: AppFonts.secondaryFontFamily,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Row(
+                  children: [
+                    // Name TextField
+                    Expanded(
+                      child: Column(
+                        children: [
+                          TextField(
+                            controller: controller.nameController,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.deny(
+                                RegExp(r'^\s'),
+                              ), // No leading space
+                            ],
+                            decoration: InputDecoration(
+                              hintText: 'Your Name',
+                              hintStyle: TextStyle(
+                                fontSize: 12,
+                                color: AppColors.hintColor,
+                              ),
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 10,
+                              ),
+                              filled: true,
+                              fillColor: AppColors.whiteTextField,
+                              border: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+
+                    // Phone TextField
+                    Expanded(
+                      child: Column(
+                        children: [
+                          TextField(
+                            controller: controller.phoneController,
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter
+                                  .digitsOnly, // Only numbers
+                              FilteringTextInputFormatter.deny(
+                                RegExp(r'\s'),
+                              ), // No spaces
+                            ],
+                            decoration: InputDecoration(
+                              hintText: 'Phone No',
+                              hintStyle: TextStyle(
+                                fontSize: 12, // Adjust font size as needed
+                                color: AppColors.hintColor, // Adjust hint color
+                              ),
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 10,
+                              ),
+                              filled: true,
+                              fillColor: AppColors.whiteTextField,
+                              border: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // -- your detail end --
+              // -- your address start --
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 10),
+                    const Text(
+                      '2. Home Address',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        fontFamily: AppFonts.secondaryFontFamily,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+
+                    TextField(
+                      controller: controller.addressController,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.deny(RegExp(r'^\s')),
+                      ],
+                      decoration: InputDecoration(
+                        hintText: 'Your Address',
+                        hintStyle: TextStyle(
+                          fontSize: 12, // Adjust font size as needed
+                          color: AppColors.hintColor, // Adjust hint color
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 10,
+                        ),
+                        filled: true,
+                        fillColor: AppColors.whiteTextField,
+                        border: InputBorder.none,
+                        enabledBorder: InputBorder.none,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CustomSearchableDropdown(
+                            onItemSelected: (selectedId) {
+                              controller.selectedTA.value = selectedId;
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Obx(
+                            () => CustomSearchableDropdownSA(
+                              selectedValues: controller.selectedTA.value,
+                              onItemSelected: (selectedId) {
+                                controller.selectedSA2.value = selectedId;
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 20),
+
+                    const Text(
+                      '3. What is your Purpose?',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        fontFamily: AppFonts.secondaryFontFamily,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    SizedBox(
+                      height: 45,
+                      child: OutlinedButton(
+                        // Pass the controller instance to the function
+                        onPressed: () {
+                          showSearchableBottomSheet(
+                            context: context,
+                            api: 'social/navigator-purpose-list',
+                            name: controller.offerName,
+                            id: controller.offerId,
+                            sheetName: "Select Purpose",
+                          );
+                        },
+                        style: OutlinedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          side: const BorderSide(color: Colors.white),
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                        ),
+                        child: Obx(() {
+                          final selected = controller.offerName.value;
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  selected.isNotEmpty
+                                      ? selected
+                                      : "Select Purpose",
+                                  style: const TextStyle(
+                                    color: Colors.black87,
+                                    fontSize: 14,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              const Icon(Icons.arrow_drop_down, size: 22),
+                            ],
+                          );
+                        }),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // --your address end --
+              //--- visit type  start --
+              const Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    '4. Visit Type',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      fontFamily: AppFonts.secondaryFontFamily,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Obx(
+                  () => Row(
+                    children: [
+                      // in home
+                      Expanded(
+                        child: GestureDetector(
+                          onTap:
+                              () => controller.selectInspectionType('In Home'),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 12,
+                            ),
+                            decoration: BoxDecoration(
+                              color:
+                                  controller.selectedInspectionType.value ==
+                                          'In Home'
+                                      ? Colors.transparent
+                                      : Colors.white,
+                              borderRadius: BorderRadius.circular(6),
+                              border: Border.all(
+                                color:
+                                    controller.selectedInspectionType.value ==
+                                            'In Home'
+                                        ? AppColors.primaryColor
+                                        : Colors.transparent,
+                                width: 1.5,
+                              ),
+                            ),
+                            child: Center(
+                              child: FittedBox(
+                                child: Text(
+                                  'In Home',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: AppColors.hintColor,
+                                    fontFamily: AppFonts.primaryFontFamily,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap:
+                              () => controller.selectInspectionType(
+                                'Virtual Phone/Video',
+                              ),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 12,
+                            ),
+                            decoration: BoxDecoration(
+                              color:
+                                  controller.selectedInspectionType.value ==
+                                          'Virtual Phone/Video'
+                                      ? Colors.transparent
+                                      : Colors.white,
+                              borderRadius: BorderRadius.circular(6),
+                              border: Border.all(
+                                color:
+                                    controller.selectedInspectionType.value ==
+                                            'Virtual Phone/Video'
+                                        ? AppColors.primaryColor
+                                        : Colors.transparent,
+                                width: 1.5,
+                              ),
+                            ),
+                            child: const Center(
+                              child: FittedBox(
+                                child: Text(
+                                  'Virtual Phone/Video',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: AppColors.hintColor,
+                                    fontFamily: AppFonts.primaryFontFamily,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                    ],
+                  ),
+                ),
+              ),
+
+              //--- visit  type end --
+
+              //--- date / time start --
+              const Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    '5. Preferred Date/Time',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      fontFamily: AppFonts.secondaryFontFamily,
+                    ),
+                  ),
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  children: [
+                    // Date Box
+                    Expanded(
+                      child: Obx(
+                        () => TextFormField(
+                          readOnly: true,
+                          onTap: () async {
+                            final pickedDate = await showDatePicker(
+                              context: Get.context!,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime.now(),
+                              lastDate: DateTime(2100),
+                            );
+                            if (pickedDate != null) {
+                              controller.selectedDate.value = pickedDate;
+                            }
+                          },
+                          decoration: InputDecoration(
+                            hintText: 'dd/mm/yyyy',
+                            filled: true,
+                            fillColor: AppColors.whiteTextField,
+                            border: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            contentPadding: const EdgeInsets.symmetric(
+                              vertical: 16,
+                              horizontal: 12,
+                            ),
+                          ),
+                          controller: TextEditingController(
+                            text:
+                                controller.selectedDate.value == null
+                                    ? ''
+                                    : DateFormat(
+                                      'yyyy-MM-dd',
+                                    ).format(controller.selectedDate.value!),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+
+                    // Time Box
+                    Expanded(
+                      child: Obx(
+                        () => TextFormField(
+                          readOnly: true,
+                          onTap: () async {
+                            final pickedTime = await showTimePicker(
+                              context: Get.context!,
+                              initialTime: TimeOfDay.now(),
+                            );
+                            if (pickedTime != null) {
+                              controller.selectedTime.value = pickedTime;
+                            }
+                          },
+                          decoration: InputDecoration(
+                            hintText: '9:00 AM',
+                            filled: true,
+                            fillColor: AppColors.whiteTextField,
+                            border: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            contentPadding: const EdgeInsets.symmetric(
+                              vertical: 16,
+                              horizontal: 12,
+                            ),
+                          ),
+                          controller: TextEditingController(
+                            text:
+                                controller.selectedTime.value == null
+                                    ? ''
+                                    : controller.selectedTime.value!.format(
+                                      Get.context!,
+                                    ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              //--- date /time end --
+              // ───── Submit Button ─────
+              const SizedBox(height: 30),
+              Center(
+                child: SizedBox(
+                  width: 150,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      final result = await controller.sendRequestNavigator();
+                      if (result == true) {
+                        final snackBarShow = Snackbar(
+                          title: 'Success',
+                          message: controller.message.value.toString(),
+                          type: 'success',
+                        );
+                        Get.back();
+                        snackBarShow.show();
+                      } else {
+                        final snackBarShow = Snackbar(
+                          title: 'Error',
+                          message: controller.message.value.toString(),
+                          type: 'error',
+                        );
+
+                        snackBarShow.show();
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primaryColor,
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: const Text(
+                      'Submit',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontFamily: AppFonts.primaryFontFamily,
+                        // fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              //--- form end ---
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
