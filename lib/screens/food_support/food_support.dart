@@ -37,12 +37,21 @@ class _FoodSupportState extends State<FoodSupport> {
               // Scrollable AppBar + Search
               MyAppBar(
                 showNotificationIcon: false,
-                showMenuIcon: true,
+                showMenuIcon: false,
                 showBackIcon: true,
-                showBottom: true,
+                showBottom: false,
+                profile: true,
                 userName: false,
                 screenName: "Food Support",
               ),
+              SizedBox(height: 20),
+              Divider(
+                color: Colors.grey,
+                thickness: 1,      // height of the line
+                indent: 20,        // left space
+                endIndent: 20,     // right space
+              ),
+
               Padding(
                 padding: EdgeInsetsGeometry.only(left: 20, right: 20, top: 40),
                 child: Column(
@@ -194,35 +203,35 @@ Widget buildSupportCenterCard(Map<String, dynamic> center) {
 
         Text("Location:", style: TextStyle(fontWeight: FontWeight.bold)),
         Text(center['address'] ?? ''),
-
-        SizedBox(height: 8),
-        ElevatedButton(
-          onPressed: () {
-            // Add location logic (e.g., open Google Maps)
-            // doctorController.findDoctors(
-            //   userLat: doctorController.latitude.value,
-            //   userLon: doctorController.longitude.value,
-            //   radiusKm: doctorController.radius,
-            // );
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.deepPurple,
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            elevation: 0, // no shadow
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(6),
-            ),
-          ),
-          child: Text(
-            "Get Location",
-            style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 12,
-              fontFamily: AppFonts.primaryFontFamily,
-              color: AppColors.whiteTextField,
-            ),
-          ),
-        ),
+        //
+        // SizedBox(height: 8),
+        // ElevatedButton(
+        //   onPressed: () {
+        //     // Add location logic (e.g., open Google Maps)
+        //     // doctorController.findDoctors(
+        //     //   userLat: doctorController.latitude.value,
+        //     //   userLon: doctorController.longitude.value,
+        //     //   radiusKm: doctorController.radius,
+        //     // );
+        //   },
+        //   style: ElevatedButton.styleFrom(
+        //     backgroundColor: Colors.deepPurple,
+        //     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        //     elevation: 0, // no shadow
+        //     shape: RoundedRectangleBorder(
+        //       borderRadius: BorderRadius.circular(6),
+        //     ),
+        //   ),
+        //   child: Text(
+        //     "Get Location",
+        //     style: TextStyle(
+        //       fontWeight: FontWeight.w500,
+        //       fontSize: 12,
+        //       fontFamily: AppFonts.primaryFontFamily,
+        //       color: AppColors.whiteTextField,
+        //     ),
+        //   ),
+        // ),
 
         const SizedBox(height: 12),
         const Text("Services:", style: TextStyle(fontWeight: FontWeight.bold)),

@@ -40,13 +40,22 @@ class _RequestAFoodParcelState extends State<RequestAFoodParcel> {
             children: [
               /* ─────────── App-bar ─────────── */
               MyAppBar(
-                showMenuIcon: true,
+                showMenuIcon: false,
                 showBackIcon: true,
                 screenName: 'Request a Food Parcel or Voucher',
                 showBottom: false,
                 userName: false,
-                showNotificationIcon: true,
+                showNotificationIcon: false,
+                profile: true,
               ),
+              SizedBox(height: 20),
+              Divider(
+                color: Colors.grey,
+                thickness: 1,      // height of the line
+                indent: 20,        // left space
+                endIndent: 20,     // right space
+              ),
+
 
               Padding(
                 padding: EdgeInsets.all(20.0),

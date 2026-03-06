@@ -39,13 +39,22 @@ class DisabilityJobs extends StatelessWidget {
             children: [
               /* ─────────── App-bar ─────────── */
               MyAppBar(
-                showMenuIcon: true,
+                showMenuIcon: false,
                 showBackIcon: true,
                 screenName: 'Jobs',
                 showBottom: false,
                 userName: false,
                 showNotificationIcon: false,
+                profile: true,
               ),
+              SizedBox(height: 20),
+              Divider(
+                color: Colors.grey,
+                thickness: 1,      // height of the line
+                indent: 20,        // left space
+                endIndent: 20,     // right space
+              ),
+
               SizedBox(height: 20),
 
               Row(

@@ -351,11 +351,19 @@ class DebtListScreenState extends State<DebtListScreen> {
             children: [
               MyAppBar(
                 showNotificationIcon: false,
-                showMenuIcon: true,
+                showMenuIcon: false,
                 showBackIcon: true,
                 showBottom: false,
                 userName: false,
                 screenName: "Debt Management",
+                profile: true,
+              ),
+              SizedBox(height: 20),
+              Divider(
+                color: Colors.grey,
+                thickness: 1,      // height of the line
+                indent: 20,        // left space
+                endIndent: 20,     // right space
               ),
               Padding(
                 padding: EdgeInsets.all(20.0),

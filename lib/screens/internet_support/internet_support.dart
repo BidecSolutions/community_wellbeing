@@ -26,12 +26,20 @@ class InternetSupport extends StatelessWidget {
               children: [
                 MyAppBar(
                   showNotificationIcon: false,
-                  showMenuIcon: true,
+                  showMenuIcon: false,
                   showBackIcon: true,
-                  showBottom: true,
+                  showBottom: false,
                   userName: false,
                   screenName: "IT Support & Repair",
                 ),
+                SizedBox(height: 20),
+                Divider(
+                  color: Colors.grey,
+                  thickness: 1,      // height of the line
+                  indent: 20,        // left space
+                  endIndent: 20,     // right space
+                ),
+
                 const SizedBox(height: 40),
 
                 /// 🖥 Main Heading

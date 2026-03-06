@@ -43,13 +43,21 @@ class _HealthyHomesApplicationState extends State<HealthyHomesApplication> {
             children: [
               /* ─────────── App-bar ─────────── */
               MyAppBar(
-                showMenuIcon: true,
+                showMenuIcon: false,
                 showBackIcon: true,
                 screenName: 'Request A Home Inspection',
                 showBottom: false,
                 userName: false,
-                showNotificationIcon: true,
+                showNotificationIcon: false,
               ),
+              SizedBox(height: 20),
+              Divider(
+                color: Colors.grey,
+                thickness: 1,      // height of the line
+                indent: 20,        // left space
+                endIndent: 20,     // right space
+              ),
+
 
               /* ─────────── App-bar End ─────────── */
               //--- form start ---

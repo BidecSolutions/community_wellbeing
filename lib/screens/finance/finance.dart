@@ -46,11 +46,19 @@ class FinancialSupportScreen extends StatelessWidget {
               // Scrollable AppBar + Search
               MyAppBar(
                 showNotificationIcon: false,
-                showMenuIcon: true,
+                showMenuIcon: false,
                 showBackIcon: true,
-                showBottom: true,
+                showBottom: false,
                 userName: false,
                 screenName: "Financial",
+                profile: true,
+              ),
+              SizedBox(height: 20),
+              Divider(
+                color: Colors.grey,
+                thickness: 1,      // height of the line
+                indent: 20,        // left space
+                endIndent: 20,     // right space
               ),
 
               Padding(

@@ -34,13 +34,22 @@ class _ProfileState extends State<Profile> {
             children: [
               /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ App-bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
               MyAppBar(
-                showMenuIcon: true,
+                showMenuIcon: false,
                 showBackIcon: true,
                 screenName: '',
                 showBottom: false,
                 userName: false,
                 showNotificationIcon: false,
+                profile: true,
               ),
+              SizedBox(height: 20),
+              Divider(
+                color: Colors.grey,
+                thickness: 1,      // height of the line
+                indent: 20,        // left space
+                endIndent: 20,     // right space
+              ),
+
 
               /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ App-bar End â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
               Padding(

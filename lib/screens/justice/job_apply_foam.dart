@@ -41,13 +41,21 @@ class _ApplyForJobState extends State<ApplyForJob> {
             children: [
               /* ─────────── App-bar ─────────── */
               MyAppBar(
-                showMenuIcon: true,
+                showMenuIcon: false,
                 showBackIcon: true,
                 screenName: 'Easy Apply For Job',
                 showBottom: false,
                 userName: false,
-                showNotificationIcon: true,
+                showNotificationIcon: false,
               ),
+              SizedBox(height: 20),
+              Divider(
+                color: Colors.grey,
+                thickness: 1,      // height of the line
+                indent: 20,        // left space
+                endIndent: 20,     // right space
+              ),
+
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Align(

@@ -45,13 +45,21 @@ class _PreLovedState extends State<PreLoved> {
               children: [
                 /* ─────────── App-bar ─────────── */
                 MyAppBar(
-                  showMenuIcon: true,
+                  showMenuIcon: false,
                   showBackIcon: true,
                   screenName: 'Pre Love',
-                  showBottom: true,
+                  showBottom: false,
                   userName: false,
                   showNotificationIcon: false,
                 ),
+                SizedBox(height: 20),
+                Divider(
+                  color: Colors.grey,
+                  thickness: 1,      // height of the line
+                  indent: 20,        // left space
+                  endIndent: 20,     // right space
+                ),
+
                 const SizedBox(height: 60),
                 Center(
                   child: Text(

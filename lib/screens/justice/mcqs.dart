@@ -25,13 +25,22 @@ class QuizScreen extends StatelessWidget {
           child: Column(
             children: [
               MyAppBar(
-                showMenuIcon: true,
+                showMenuIcon: false,
                 showBackIcon: true,
                 screenName: title,
                 showBottom: false,
                 userName: false,
                 showNotificationIcon: false,
+                profile: true,
               ),
+              SizedBox(height: 20),
+              Divider(
+                color: Colors.grey,
+                thickness: 1,      // height of the line
+                indent: 20,        // left space
+                endIndent: 20,     // right space
+              ),
+
               Center(
                 child: Text(
                   subtitle,

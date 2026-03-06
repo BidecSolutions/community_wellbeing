@@ -28,13 +28,22 @@ class DoYouKnowYourCulture extends StatelessWidget {
           child: Column(
             children: [
               MyAppBar(
-                showMenuIcon: true,
+                showMenuIcon: false,
                 showBackIcon: true,
                 screenName: title,
                 showBottom: false,
                 userName: false,
-                showNotificationIcon: true,
+                showNotificationIcon: false,
+                profile: true,
               ),
+              SizedBox(height: 20),
+              Divider(
+                color: Colors.grey,
+                thickness: 1,      // height of the line
+                indent: 20,        // left space
+                endIndent: 20,     // right space
+              ),
+
 
               Padding(
                 padding: const EdgeInsets.all(20),

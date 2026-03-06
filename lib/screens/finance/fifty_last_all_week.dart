@@ -28,11 +28,19 @@ class FiftyLastAllWeek extends StatelessWidget {
             children: [
               MyAppBar(
                 showNotificationIcon: false,
-                showMenuIcon: true,
+                showMenuIcon: false,
                 showBackIcon: true,
                 showBottom: false,
                 userName: false,
                 screenName: "Watch: How to make \n\$50 last all week",
+                profile: true,
+              ),
+              SizedBox(height: 20),
+              Divider(
+                color: Colors.grey,
+                thickness: 1,      // height of the line
+                indent: 20,        // left space
+                endIndent: 20,     // right space
               ),
 
               //--- video section start --
